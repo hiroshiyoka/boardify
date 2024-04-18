@@ -1,5 +1,5 @@
-const IdPage = () => {
-  return <div>ID Page!</div>;
+const IdPage = ({ params }: { params: { id: string } }) => {
+  return <div>ID Page! {params.id}</div>;
 };
 
 export default IdPage;
