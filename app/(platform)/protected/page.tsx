@@ -1,5 +1,13 @@
+"use client";
+
+import { UserButton } from "@clerk/nextjs";
+
 const ProtectedPage = () => {
-  return <div>Protected Page!</div>;
+  return (
+    <div>
+      <UserButton />
+    </div>
+  );
 };
 
 export default ProtectedPage;
