@@ -1,4 +1,5 @@
 import { authMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export default authMiddleware({
   publicRoutes: ["/"],
@@ -9,6 +10,9 @@ export default authMiddleware({
       if (auth.orgId) {
         path = `/organization/${auth.orgId}`;
       }
+
+      const orgSelection = new URL(path, req.url);
+      return NextResponse.redirect(orgSelection);
     }
   },
 });
