@@ -1,5 +1,5 @@
-import { authMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
+import { authMiddleware, redirectToSignIn } from "@clerk/nextjs/server";
 
 export default authMiddleware({
   publicRoutes: ["/"],
@@ -13,6 +13,12 @@ export default authMiddleware({
 
       const orgSelection = new URL(path, req.url);
       return NextResponse.redirect(orgSelection);
+    }
+
+    if (!auth.userId && !auth.isPublicRoute) {
+      return redirectToSignIn({
+        returnBackUrl: req.url,
+      });
     }
   },
 });
