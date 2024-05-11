@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocalStorage } from "usehooks-ts";
-import { useOrganization } from "@clerk/nextjs";
+import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 
 interface SidebarProps {
   storageKey?: string;
@@ -14,6 +14,11 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   );
   const { organization: activeOrganization, isLoaded: isLoadedOrg } =
     useOrganization();
+  const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
+    userMemberships: {
+      infinite: true,
+    },
+  });
 
   return <div>Sidebar!</div>;
 };
