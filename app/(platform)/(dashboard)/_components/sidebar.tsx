@@ -3,6 +3,8 @@
 import { useLocalStorage } from "usehooks-ts";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 
+import { Skeleton } from "@/components/ui/skeleton";
+
 interface SidebarProps {
   storageKey?: string;
 }
@@ -37,6 +39,14 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       [id]: !expanded[id],
     }));
   };
+
+  if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
+    return (
+      <>
+        <Skeleton />
+      </>
+    );
+  }
 
   return <div>Sidebar!</div>;
 };
