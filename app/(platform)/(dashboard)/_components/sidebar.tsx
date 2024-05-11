@@ -31,5 +31,12 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     []
   );
 
+  const onExpand = (id: string) => {
+    setExpanded((curr) => ({
+      ...curr,
+      [id]: !expanded[id],
+    }));
+  };
+
   return <div>Sidebar!</div>;
 };
