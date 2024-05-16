@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Activity, CreditCard, Layout, Settings } from "lucide-react";
 
@@ -26,6 +27,9 @@ export const NavItem = ({
   organization,
   onExpand,
 }: NavItemProps) => {
+  const router = useRouter();
+  const pathName = usePathname();
+
   const routes = [
     {
       label: "Boards",
