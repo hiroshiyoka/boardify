@@ -1,7 +1,10 @@
 import { create } from "@/actions/createBoard";
 import { Button } from "@/components/ui/button";
+import { db } from "@/lib/db";
 
-const OrganizationPage = () => {
+const OrganizationPage = async () => {
+  const boards = await db.board.findMany();
+
   return (
     <div>
       <form action={create}>
