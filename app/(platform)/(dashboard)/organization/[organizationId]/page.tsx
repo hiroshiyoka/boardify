@@ -1,7 +1,9 @@
+import { create } from "@/actions/createBoard";
+
 const OrganizationPage = () => {
   return (
     <div>
-      <form>
+      <form action={create}>
         <input
           id="title"
           name="title"
