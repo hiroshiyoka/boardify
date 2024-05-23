@@ -1,4 +1,5 @@
 import { create } from "@/actions/createBoard";
+import { Button } from "@/components/ui/button";
 
 const OrganizationPage = () => {
   return (
@@ -12,6 +13,7 @@ const OrganizationPage = () => {
           className="border-black border p-1"
         />
       </form>
+      <Button type="submit">Submit</Button>
     </div>
   );
 };
