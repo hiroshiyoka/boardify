@@ -9,7 +9,9 @@ const CreateBoard = z.object({
 });
 
 export async function create(formData: FormData) {
-  const title = formData.get("title") as string;
+  const { title } = CreateBoard.parse({
+    title: formData.get("title"),
+  });
 
   await db.board.create({
     data: {
