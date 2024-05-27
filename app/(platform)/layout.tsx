@@ -1,7 +1,13 @@
 import { ClerkProvider } from "@clerk/nextjs";
 
 const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
-  return <ClerkProvider>{children}</ClerkProvider>;
+  return (
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
+      {children}
+    </ClerkProvider>
+  );
 };
 
 export default PlatformLayout;
