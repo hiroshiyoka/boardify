@@ -24,7 +24,9 @@ export const FormInput = ({ errors }: FormInputProps) => {
       {errors?.title ? (
         <div>
           {errors?.title.map((error: string) => (
-            <p key={error} className="text-rose-500"></p>
+            <p key={error} className="text-rose-500">
+              {error}
+            </p>
           ))}
         </div>
       ) : null}
