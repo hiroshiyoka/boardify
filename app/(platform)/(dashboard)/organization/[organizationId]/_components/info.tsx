@@ -9,7 +9,7 @@ export const Info = () => {
   const { organization, isLoaded } = useOrganization();
 
   if (!isLoaded) {
-    return <p>Loading...</p>;
+    return <Info.Skeleton />;
   }
 
   return (
