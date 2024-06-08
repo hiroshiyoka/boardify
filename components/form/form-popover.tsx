@@ -7,7 +7,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useAction } from "@/hooks/use-action";
 import { Button } from "@/components/ui/button";
+import { createBoard } from "@/actions/create-board";
 
 import { FormInput } from "./form-input";
 import { FormSubmit } from "./form-submit";
@@ -23,8 +25,23 @@ export const FormPopover = ({
   children,
   side = "bottom",
   align,
-  sideOffset,
+  sideOffset = 0,
 }: FormPopoverProps) => {
+  const { execute, fieldErrors } = useAction(createBoard, {
+    onSuccess: (data) => {
+      console.log({ data });
+    },
+    onError: (error) => {
+      console.log({ error });
+    },
+  });
+
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
+
+    execute({ title });
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
@@ -45,9 +62,14 @@ export const FormPopover = ({
             <X className="h-4 w-4" />
           </Button>
         </PopoverClose>
-        <form className="space-y-4">
+        <form action={onSubmit} className="space-y-4">
           <div className="space-y-4">
-            <FormInput id="title" label="Board title" type="text" />
+            <FormInput
+              id="title"
+              label="Board title"
+              type="text"
+              errors={fieldErrors}
+            />
           </div>
           <FormSubmit className="w-full">Create</FormSubmit>
         </form>
