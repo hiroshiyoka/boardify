@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { FormInput } from "./form-input";
+import { FormSubmit } from "./form-submit";
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -48,6 +49,7 @@ export const FormPopover = ({
           <div className="space-y-4">
             <FormInput id="title" label="Board title" type="text" />
           </div>
+          <FormSubmit className="w-full">Create</FormSubmit>
         </form>
       </PopoverContent>
     </Popover>
