@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { unsplash } from "@/lib/unsplash";
@@ -37,6 +38,14 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
 
     fetchImages();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="p-6 flex items-center justify-center">
+        <Loader2 className="h-6 w-6 text-sky-700 animate-spin" />
+      </div>
+    );
+  }
 
   return <div>Form Picker!</div>;
 };
