@@ -11,6 +11,7 @@ interface FormPickerProps {
 
 export const FormPicker = ({ id, errors }: FormPickerProps) => {
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -29,8 +30,12 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
       } catch (error) {
         console.log(error);
         setImages([]);
+      } finally {
+        setIsLoading(false);
       }
     };
+
+    fetchImages();
   }, []);
 
   return <div>Form Picker!</div>;
