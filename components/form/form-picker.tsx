@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { useFormStatus } from "react-dom";
 import { useEffect, useState } from "react";
 
 import { unsplash } from "@/lib/unsplash";
@@ -11,8 +12,11 @@ interface FormPickerProps {
 }
 
 export const FormPicker = ({ id, errors }: FormPickerProps) => {
+  const { pending } = useFormStatus();
+
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImageId, setSelectedImageId] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
