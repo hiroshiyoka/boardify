@@ -29,14 +29,16 @@ export const Navbar = () => {
           </Button>
         </FormPopover>
 
-        {/* Plus Button */}
-        <Button
-          variant="primary"
-          size="sm"
-          className="rounded-sm block md:hidden"
-        >
-          <Plus className="h-4 w-4" />
-        </Button>
+        <FormPopover>
+          {/* Plus Button */}
+          <Button
+            variant="primary"
+            size="sm"
+            className="rounded-sm block md:hidden"
+          >
+            <Plus className="h-4 w-4" />
+          </Button>
+        </FormPopover>
       </div>
 
       <div className="ml-auto flex items-center gap-x-2">
