@@ -1,9 +1,17 @@
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { HelpCircle, User2 } from "lucide-react";
 
 import { Hint } from "@/components/hint";
 import { FormPopover } from "@/components/form/form-popover";
 
 export const BoardList = () => {
+  const { orgId } = auth();
+
+  if (!orgId) {
+    return redirect("/select-org");
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex items-center font-semibold text-lg text-neutral-700">
