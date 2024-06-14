@@ -2,15 +2,25 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { HelpCircle, User2 } from "lucide-react";
 
+import { db } from "@/lib/db";
 import { Hint } from "@/components/hint";
 import { FormPopover } from "@/components/form/form-popover";
 
-export const BoardList = () => {
+export const BoardList = async () => {
   const { orgId } = auth();
 
   if (!orgId) {
     return redirect("/select-org");
   }
+
+  const boards = await db.board.findMany({
+    where: {
+      orgId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return (
     <div className="space-y-4">
