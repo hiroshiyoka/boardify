@@ -18,6 +18,10 @@ export const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
 
   const enableEditing = () => {
     setIsEditing(true);
+    setTimeout(() => {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    });
   };
 
   const disableEditing = () => {
