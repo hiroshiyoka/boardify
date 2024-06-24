@@ -24,6 +24,10 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
     },
   });
 
+  const onDelete = () => {
+    execute({ id });
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -45,7 +49,8 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
         </PopoverClose>
         <Button
           variant="ghost"
-          onClick={() => {}}
+          onClick={onDelete}
+          disabled={isLoading}
           className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
         >
           Delete this board
