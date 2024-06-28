@@ -1,7 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { useEventListener } from "usehooks-ts";
+import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { useState, useRef, ElementRef } from "react";
 
 import { ListWrapper } from "./list-wrapper";
@@ -30,6 +30,7 @@ export const ListForm = () => {
   };
 
   useEventListener("keydown", onKeyDown);
+  useOnClickOutside(formRef, disableEditing);
 
   return (
     <ListWrapper>
