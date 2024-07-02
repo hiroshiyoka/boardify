@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ListWithCards } from "@/types";
 
@@ -13,6 +13,10 @@ interface ListContainerProps {
 
 export const ListContainer = ({ data, boardId }: ListContainerProps) => {
   const [orderedData, setOrderedData] = useState(data);
+
+  useEffect(() => {
+    setOrderedData(data);
+  }, [data]);
 
   return (
     <ol>
