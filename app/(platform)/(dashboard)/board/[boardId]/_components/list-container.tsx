@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { ListWithCards } from "@/types";
 
 import { ListForm } from "./list-form";
@@ -10,6 +12,8 @@ interface ListContainerProps {
 }
 
 export const ListContainer = ({ data, boardId }: ListContainerProps) => {
+  const [orderedData, setOrderedData] = useState(data);
+
   return (
     <ol>
       <ListForm />
