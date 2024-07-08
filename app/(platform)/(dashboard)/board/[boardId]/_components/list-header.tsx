@@ -49,7 +49,10 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
           />
         </form>
       ) : (
-        <div className="w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent">
+        <div
+          onClick={enableEditing}
+          className="w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent"
+        >
           {title}
         </div>
       )}
