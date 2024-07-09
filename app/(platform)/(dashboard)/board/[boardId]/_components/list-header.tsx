@@ -1,9 +1,12 @@
 "use client";
 
+import { toast } from "sonner";
 import { List } from "@prisma/client";
 import { useEventListener } from "usehooks-ts";
 import { useState, useRef, ElementRef } from "react";
 
+import { useAction } from "@/hooks/use-action";
+import { updateList } from "@/actions/update-list";
 import { FormInput } from "@/components/form/form-input";
 
 interface ListHeaderProps {
@@ -24,6 +27,21 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
       inputRef.current?.select();
     });
   };
+
+  const disableEditing = () => {
+    setIsEditing(false);
+  };
+
+  const { execute } = useAction(updateList, {
+    onSuccess: (data) => {
+      toast.success(`Renamed to "${data.title}"`);
+      setTitle(data.title);
+      disableEditing();
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const onKeydown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
