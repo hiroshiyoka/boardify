@@ -59,6 +59,10 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
     });
   };
 
+  const onBlur = () => {
+    formRef.current?.requestSubmit();
+  };
+
   const onKeydown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       formRef.current?.requestSubmit();
