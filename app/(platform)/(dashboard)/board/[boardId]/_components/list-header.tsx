@@ -43,6 +43,22 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
     },
   });
 
+  const handleSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
+    const id = formData.get("id") as string;
+    const boardId = formData.get("boardId") as string;
+
+    if (title === data.title) {
+      return disableEditing();
+    }
+
+    execute({
+      title,
+      id,
+      boardId,
+    });
+  };
+
   const onKeydown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
       formRef.current?.requestSubmit();
