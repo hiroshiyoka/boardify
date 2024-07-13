@@ -36,6 +36,13 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
             <X className="h-4 w-4" />
           </Button>
         </PopoverClose>
+        <Button
+          onClick={onAddCard}
+          className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+          variant="ghost"
+        >
+          Add card...
+        </Button>
       </PopoverContent>
     </Popover>
   );
