@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { List } from "@prisma/client";
 import { MoreHorizontal, X } from "lucide-react";
 
@@ -9,7 +10,9 @@ import {
   PopoverTrigger,
   PopoverClose,
 } from "@/components/ui/popover";
+import { useAction } from "@/hooks/use-action";
 import { Button } from "@/components/ui/button";
+import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Separator } from "@/components/ui/separator";
 
@@ -19,6 +22,22 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
+  const { execute: executeDelete } = useAction(deleteList, {
+    onSuccess: (data) => {
+      toast.success(`List "${data.title}" deleted`);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
+  const onDelete = (formData: FormData) => {
+    const id = formData.get("id") as string;
+    const boardId = formData.get("boardId") as string;
+
+    executeDelete({ id, boardId });
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -56,7 +75,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           </FormSubmit>
         </form>
         <Separator />
-        <form>
+        <form action={onDelete}>
           <input hidden name="id" id="id" value={data.id} />
           <input hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
