@@ -2,6 +2,7 @@
 
 import { toast } from "sonner";
 import { List } from "@prisma/client";
+import { ElementRef, useRef } from "react";
 import { MoreHorizontal, X } from "lucide-react";
 
 import {
@@ -22,6 +23,8 @@ interface ListOptionsProps {
 }
 
 export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
+  const closeRef = useRef<ElementRef<"button">>(null);
+
   const { execute: executeDelete } = useAction(deleteList, {
     onSuccess: (data) => {
       toast.success(`List "${data.title}" deleted`);
