@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { FormErrors } from "./form-errors";
+
 interface FormTextareaProps {
   id: string;
   label?: string;
@@ -66,6 +68,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
             defaultValue={defaultValue}
           />
         </div>
+        <FormErrors id={id} errors={errors} />
       </div>
     );
   }
