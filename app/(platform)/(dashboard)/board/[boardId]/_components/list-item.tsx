@@ -5,8 +5,9 @@ import { ElementRef, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { ListWithCards } from "@/types";
 
-import { ListHeader } from "./list-header";
 import { CardForm } from "./card-form";
+import { CardItem } from "./card-item";
+import { ListHeader } from "./list-header";
 
 interface ListItemProps {
   data: ListWithCards;
@@ -38,7 +39,11 @@ export const ListItem = ({ data, index }: ListItemProps) => {
             "mx-1 px-1 py-0.5 flex flex-col gap-y-2",
             data.cards.length > 0 ? "mt-2" : "mt-0"
           )}
-        ></ol>
+        >
+          {data.cards.map((card, index) => (
+            <CardItem index={index} key={card.id} data={card} />
+          ))}
+        </ol>
         <CardForm
           listId={data.id}
           ref={textareaRef}
