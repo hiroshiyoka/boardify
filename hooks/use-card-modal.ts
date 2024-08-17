@@ -7,7 +7,7 @@ type CardodalStore = {
   onClose: () => void;
 };
 
-export const useCardMOdal = create<CardodalStore>((set) => ({
+export const useCardModal = create<CardodalStore>((set) => ({
   id: undefined,
   isOpen: false,
   onOpen: (id: string) => set({ isOpen: true, id }),

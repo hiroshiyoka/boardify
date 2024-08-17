@@ -1,12 +1,12 @@
 "use client";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { useCardMOdal } from "@/hooks/use-card-modal";
+import { useCardModal } from "@/hooks/use-card-modal";
 
 export const CardModal = () => {
-  const id = useCardMOdal((state) => state.id);
-  const isOpen = useCardMOdal((state) => state.isOpen);
-  const onClose = useCardMOdal((state) => state.onClose);
+  const id = useCardModal((state) => state.id);
+  const isOpen = useCardModal((state) => state.isOpen);
+  const onClose = useCardModal((state) => state.onClose);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
