@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { Layout } from "lucide-react";
 import { useParams } from "next/navigation";
 import { ElementRef, useRef, useState } from "react";
@@ -18,7 +19,19 @@ interface HeaderProps {
 export const Header = ({ data }: HeaderProps) => {
   const params = useParams();
 
-  const { execute } = useAction(updateCard);
+  const { execute } = useAction(updateCard, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["card", data.id],
+      });
+
+      toast.success(`Renamed to "${data.title}"`);
+      setTitle(data.title);
+    },
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
 
   const queryClient = useQueryClient();
 
