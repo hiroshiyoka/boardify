@@ -8,6 +8,7 @@ import { useCardModal } from "@/hooks/use-card-modal";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import { Header } from "./header";
+import { Actions } from "./actions";
 import { Description } from "./description";
 
 export const CardModal = () => {
@@ -34,6 +35,7 @@ export const CardModal = () => {
               )}
             </div>
           </div>
+          {!cardData ? <Actions.Skeleton /> : <Actions data={cardData} />}
         </div>
       </DialogContent>
     </Dialog>
