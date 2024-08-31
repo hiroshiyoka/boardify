@@ -10,6 +10,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import { Header } from "./header";
 import { Actions } from "./actions";
+import { Activity } from "./activity";
 import { Description } from "./description";
 
 export const CardModal = () => {
@@ -22,7 +23,7 @@ export const CardModal = () => {
     queryFn: () => fetcher(`/api/cards/${id}`),
   });
 
-  const { data: auditLogsData } = useQuery<AuditLOg>({
+  const { data: auditLogsData } = useQuery<AuditLOg[]>({
     queryKey: ["card-logs", id],
     queryFn: () => fetcher(`/api/cards/${id}/logs`),
   });
@@ -38,6 +39,12 @@ export const CardModal = () => {
                 <Description.Skeleton />
               ) : (
                 <Description data={cardData} />
+              )}
+
+              {!auditLogsData ? (
+                <Activity.Skeleton />
+              ) : (
+                <Activity items={auditLogsData} />
               )}
             </div>
           </div>
