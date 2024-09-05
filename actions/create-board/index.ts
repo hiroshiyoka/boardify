@@ -7,6 +7,7 @@ import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { db } from "@/lib/db";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
+import { incrementAvailableCount, hasAvailableCount } from "@/lib/org-limit";
 
 import { InputType, ReturnType } from "./types";
 import { CreateBoard } from "./schema";
@@ -17,6 +18,15 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   if (!userId || !orgId) {
     return {
       error: "Unauthorized",
+    };
+  }
+
+  const canCreate = await hasAvailableCount();
+
+  if (!canCreate) {
+    return {
+      error:
+        "You have reached your limit of free boards. Please upgrade to create more.",
     };
   }
 
@@ -51,6 +61,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageLinkHTML,
       },
     });
+
+    await incrementAvailableCount();
 
     await createAuditLog({
       entityTitle: board.title,
