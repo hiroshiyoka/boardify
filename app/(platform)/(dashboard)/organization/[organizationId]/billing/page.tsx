@@ -16,3 +16,5 @@ const BillingPage = async () => {
     </div>
   );
 };
+
+export default BillingPage;
